@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import NoteEditor from './NoteEditor';
-import NoteViewer from './NoteViewer';
-import Instructions from './Instructions';
+import React, { Component } from "react";
+import NoteEditor from "./NoteEditor";
+import NoteViewer from "./NoteViewer";
+import Instructions from "./Instructions";
+import { connect } from "react-redux";
 
 /*
   Advice: If you cannot figure out how to get this component to work,
@@ -12,22 +13,27 @@ import Instructions from './Instructions';
 */
 class Content extends Component {
   renderContent = () => {
-    if (false) {
+    if (this.props.editClicked.editClicked) {
       return <NoteEditor />;
-    } else if (false) {
+    } else if (this.props.sidebarClicked) {
       return <NoteViewer />;
     } else {
       return <Instructions />;
     }
-  }
+  };
 
   render() {
     return (
-      <div className='master-detail-element detail'>
-        {this.renderContent()}
-      </div>
+      <div className="master-detail-element detail">{this.renderContent()}</div>
     );
   }
 }
 
-export default Content;
+function mapStatetoProps(state) {
+  return {
+    sidebarClicked: state.clickedReducer,
+    editClicked: state.editClickReducer
+  };
+}
+
+export default connect(mapStatetoProps)(Content);

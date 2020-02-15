@@ -1,13 +1,38 @@
-import React, { Fragment } from 'react';
 
-const NoteViewer = (props) => {
-  return (
-    <Fragment>
-      <h2>Title</h2>
-      <p>Body</p>
-      <button>Edit</button>
+import React, { Component,Fragment } from 'react'
+import * as noteActions from "../redux/actions/notesActions"
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+
+class NoteViewer extends Component {
+  render() {
+    return (
+      <Fragment>
+      <h2>{this.props.object.title}</h2>
+      <p>{this.props.object.body}</p>
+      <button onClick = {this.props.actions.handleEditClick}>Edit</button>
     </Fragment>
-  );
+    )
+  }
 }
 
-export default NoteViewer;
+
+
+function mapStatetoProps(state) {
+  return {
+    object:state.singleObjectReducer,
+    editClicked:state.editClickReducer
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      handleEditClick: bindActionCreators(noteActions.editClickSuccess, dispatch)
+    }
+  }
+}
+
+export default connect(mapStatetoProps,mapDispatchToProps)(NoteViewer);
+
