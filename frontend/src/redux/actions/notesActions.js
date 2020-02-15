@@ -59,7 +59,7 @@ export function cancelEditSuccess() {
 export function createNote() {
   return function(dispatch) {
     axios
-      .post("http://localhost:3000/api/v1/notes/", {
+      .post("https://evernotev2.herokuapp.com/api/v1/notes/", {
         headers: { "Content-Type": "application/json" },
         title: "Default",
         body: "PlaceHolder",
@@ -71,7 +71,7 @@ export function createNote() {
 
 export function fetchNotes() {
   return function(dispatch) {
-    let url = `http://localhost:3000/api/v1/notes`;
+    let url = `https://evernotev2.herokuapp.com/api/v1/notes`;
     axios.get(url).then(data => dispatch(getNotes(data.data)));
   };
 }
@@ -79,7 +79,7 @@ export function fetchNotes() {
 export function editNote(note) {
  
   return function(dispatch) {
-    let url = `http://localhost:3000/api/v1/notes/${note.id}`;
+    let url = `https://evernotev2.herokuapp.com/api/v1/notes/${note.id}`;
     fetch(url, {
       headers: { "Content-Type": "application/json" },
       method: "PATCH",

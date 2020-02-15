@@ -11,7 +11,7 @@ export default function editNoteSucess(note) {
 export function editNote(e,note) {
     
     return function(dispatch) {
-        let url = `http://localhost:3000/api/v1/notes/${note.id}`
+        let url = `https://evernotev2.herokuapp.com/api/v1/notes/${note.id}`
         fetch(url, {
             headers: { "Content-Type": "application/json" },
             method: "PATCH",
